@@ -1,0 +1,18 @@
+# this config file contains all config fields with comments
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+# patch the generated kubeadm config with some extra settings
+kubeadmConfigPatches:
+- |
+  apiVersion: kubeadm.k8s.io/v1beta2
+  kind: ClusterConfiguration
+  networking:
+    apiServerAddress: 0.0.0.0
+    apiServerPort: -1
+  metadata:
+    name: kind-config
+  kind: InitConfiguration
+# 1 control plane node and 1 worker
+nodes:
+- role: control-plane
+- role: worker
