@@ -23,8 +23,6 @@ RUN apt-get update && \
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/update-kube-config.sh
-
 # https://github.com/docker-library/docker/pull/166
 #   dockerd-entrypoint.sh uses DOCKER_TLS_CERTDIR for auto-generating TLS certificates
 #   docker-entrypoint.sh uses DOCKER_TLS_CERTDIR for auto-setting DOCKER_TLS_VERIFY and DOCKER_CERT_PATH
@@ -46,6 +44,8 @@ RUN go get sigs.k8s.io/kind@v0.7.0
 
 COPY update-kube-config.sh /usr/local/bin/
 COPY kind-config.yaml /tmp
+
+RUN chmod +x /usr/local/bin/update-kube-config.sh
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["sh"]
