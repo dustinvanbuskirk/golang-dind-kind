@@ -1,4 +1,4 @@
-FROM golang:1.12
+FROM golang:1.15
 
 ENV GO111MODULE=on
 
@@ -40,7 +40,7 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s 
     mv ./kubectl /usr/local/bin/kubectl
 
 # Install kind
-RUN go get sigs.k8s.io/kind@v0.7.0
+RUN go get sigs.k8s.io/kind@v0.10.0
 
 COPY update-kube-config.sh /usr/local/bin/
 COPY kind-config.yaml /tmp
