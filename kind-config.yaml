@@ -2,16 +2,10 @@
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
-  apiServerAddress: "0.0.0.0"
+  apiServerAddress: "127.0.0.1"
 # patch the generated kubeadm config with some extra settings
-kubeadmConfigPatchesJSON6902:
-  - group: kubeadm.k8s.io
-    version: v1beta2
-    kind: ClusterConfiguration
-    patch: |
-      - op: add
-        path: /apiServer/certSANs/-
-        value: docker
+apiServer:
+  certSANs: [localhost, "127.0.0.1"]
 # 1 control plane node and 1 worker
 nodes:
 - role: control-plane
